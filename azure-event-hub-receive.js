@@ -13,15 +13,15 @@ module.exports = function (RED) {
         node.status({});
 
         try {
-            const consumerClient = new EventHubConsumerClient(config.consumergroup, config.connectionstring, config.eventhubname);
+            node.consumerClient = new EventHubConsumerClient(config.consumergroup, config.connectionstring, config.eventhubname);
 
-            const subscription = consumerClient.subscribe(
+            node.subscription = consumerClient.subscribe(
                 {
                   // The callback where you add your code to process incoming events
                   processEvents: async (events, context) => {
                     // message received from Event Hub partition
                     for (const event of events) {
-                        console.log(`Received event from partition: '${context.partitionId}' and consumer group: '${context.consumerGroup}'`);
+                        node.debug(`Received event from partition: '${context.partitionId}' and consumer group: '${context.consumerGroup}'`);
                         var msg = { payload: event.body }
                         node.send(msg);
                     }
@@ -44,8 +44,8 @@ module.exports = function (RED) {
 
         this.on('close', async function (done) {
           node.log('closing ...');
-          await subscription.close();
-          await consumerClient.close();          
+          await node.subscription.close();
+          await node.consumerClient.close();          
           node.log('closing done.');
           done();
           });
