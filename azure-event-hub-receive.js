@@ -15,7 +15,7 @@ module.exports = function (RED) {
         try {
             node.consumerClient = new EventHubConsumerClient(config.consumergroup, config.connectionstring, config.eventhubname);
 
-            node.subscription = consumerClient.subscribe(
+            node.subscription = node.consumerClient.subscribe(
                 {
                   // The callback where you add your code to process incoming events
                   processEvents: async (events, context) => {
