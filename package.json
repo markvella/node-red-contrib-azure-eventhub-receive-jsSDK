@@ -1,0 +1,29 @@
+{
+  "name": "node-red-contrib-azure-eventhub-receive-jssdk",
+  "description": "A simple node that receives messages from an Azure Event Hub. Based on the work of Jan Tielens and updated to use the latest Azure Java Script SDK.",
+  "version": "0.0.17",
+  "author": {
+    "name": "Mark Vella"
+  },
+  "node-red": {
+    "nodes": {
+      "azure-event-hub-receive": "azure-event-hub-receive.js"
+    }
+  },
+  "dependencies": {
+    "@azure/event-hubs": "^5.8.0"
+  },
+  "keywords": [
+    "node-red",
+    "Azure",
+    "Azure Event Hub",
+    "Event Hub",
+    "IoT",
+    "Event Hubs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markvella/node-red-contrib-azure-eventhub-receive-jsSDK"
+  },
+  "license": "MIT"
+}
