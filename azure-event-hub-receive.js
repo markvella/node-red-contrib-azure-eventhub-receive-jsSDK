@@ -42,11 +42,12 @@ module.exports = function (RED) {
             node.status({ fill: "red", shape: "ring", text: "can't connect, " + err.message });
         }
 
-        this.on('close', function (done) {
+        this.on('close', async function (done) {
           node.log('closing ...');
-          subscription.close();
-          consumerClient.close();
+          await subscription.close();
+          await consumerClient.close();          
           node.log('closing done.');
+          done();
           });
 
     }
